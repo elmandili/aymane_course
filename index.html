@@ -85,12 +85,44 @@
       color: var(--text);
     }
 
+    .nav-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 22px;
+    }
+
+    .nav-toggle span {
+      line-height: 1;
+    }
+
     .hero {
       padding: 72px 0 44px;
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 28px;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
       align-items: center;
+    }
+
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 380px;
+      border-radius: 24px;
+      object-fit: cover;
+      box-shadow: var(--shadow);
     }
 
     .hero-text h1 {
@@ -159,12 +191,6 @@
     .section-title {
       font-size: clamp(1.6rem, 3vw, 2.4rem);
       margin: 22px 0 8px;
-    }
-
-    .section-subtitle {
-      color: var(--muted);
-      margin-bottom: 26px;
-      line-height: 1.7;
     }
 
     .courses-grid {
@@ -320,12 +346,64 @@
       border: 1px solid rgba(255,255,255,0.07);
     }
 
+    .form-frame-wrapper {
+      position: relative;
+      min-height: 820px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .form-loader {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      background: rgba(11,16,32,0.88);
+      color: var(--text);
+      z-index: 2;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .form-loader.hidden-loader {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.15);
+      border-top-color: var(--primary);
+      animation: spin 0.9s linear infinite;
+    }
+
+    .form-loader p {
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.6;
+      max-width: 320px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
     iframe {
       width: 100%;
       min-height: 820px;
       border: none;
       border-radius: 18px;
       background: white;
+      display: block;
     }
 
     footer {
@@ -342,9 +420,78 @@
         grid-template-columns: 1fr;
       }
 
-      .nav {
+      .hero-text {
+        text-align: center;
+        align-items: center;
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
+      }
+
+      .badge-row {
+        justify-content: center;
+      }
+
+      .hero-text p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-text button {
+        align-self: center;
+      }
+
+      .hero-image {
+        margin-top: 20px;
+        justify-content: center;
+      }
+
+      .hero-image img {
+        max-width: 260px;
+      }
+    }
+
+      .hero-image {
+        margin-top: 20px;
+      }
+
+      .hero-image img {
+        max-width: 260px;
+      }
+    
+
+    @media (max-width: 768px) {
+      header {
+        padding: 18px 0;
+      }
+
+      .nav {
+        position: relative;
+        flex-wrap: wrap;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+        margin-left: auto;
+      }
+
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 14px;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.08);
       }
     }
 
@@ -363,6 +510,10 @@
       iframe {
         min-height: 700px;
       }
+
+      .form-frame-wrapper {
+        min-height: 700px;
+      }
     }
   </style>
 </head>
@@ -372,7 +523,10 @@
       <div class="brand">
         <span>aymane_course</span>
       </div>
-      <nav class="nav-links">
+      <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
+        <span>☰</span>
+      </button>
+      <nav class="nav-links" id="navLinks">
         <a href="#home">Accueil</a>
         <a href="#courses">Formations</a>
         <a href="#apply">Inscription</a>
@@ -399,25 +553,12 @@
           <button class="btn btn-primary" onclick="scrollToCourses()">Voir les formations</button>
         </div>
 
-        <div class="hero-card">
-          <h3>Ce que les étudiants peuvent faire ici</h3>
-          <p>
-            Cette page permet à votre audience de découvrir facilement vos offres et de s’inscrire sans quitter le site.
-          </p>
-          <ul>
-            <li>Parcourir les formations disponibles</li>
-            <li>Voir le niveau, la durée et le contenu</li>
-            <li>Ouvrir la page d’inscription d’une formation</li>
-            <li>Remplir directement le formulaire Google sur le site</li>
-          </ul>
+        <div class="hero-image">
+          <img src="img\profile.jpg" alt="Aymane" />
         </div>
       </div>
 
       <h2 id="courses" class="section-title">Formations disponibles</h2>
-      <p class="section-subtitle">
-        Vous pouvez modifier plus tard les titres, descriptions, images et liens des formulaires Google afin qu’ils correspondent à vos offres réelles.
-      </p>
-
       <div class="courses-grid" id="coursesGrid"></div>
     </section>
 
@@ -436,7 +577,13 @@
         </div>
 
         <div class="form-card">
-          <div id="formContainer"></div>
+          <div class="form-frame-wrapper">
+            <div class="form-loader hidden-loader" id="formLoader">
+              <div class="spinner"></div>
+              <p>Le formulaire est en cours de chargement. Merci de patienter quelques secondes…</p>
+            </div>
+            <div id="formContainer"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -454,7 +601,7 @@
     const courses = [
       {
         id: "computer-science",
-        image: "./img/cs.jpg",
+        image: "img/cs.jpg",
         title: "Fondamentaux de l’informatique",
         level: "Débutant",
         duration: "6 mois",
@@ -466,7 +613,7 @@
       },
       {
         id: "web-development",
-        image: "./img/web.avif",
+        image: "img/web.avif",
         title: "Développement Web",
         level: "Bientôt disponible",
         duration: "À venir",
@@ -478,7 +625,7 @@
       },
       {
         id: "networking",
-        image: "./img/networking.avif",
+        image: "img/networking.avif",
         title: "Réseaux informatiques",
         level: "Bientôt disponible",
         duration: "À venir",
@@ -494,6 +641,9 @@
     const homeView = document.querySelector('[data-view="home"]');
     const courseView = document.querySelector('[data-view="course"]');
     const formContainer = document.getElementById("formContainer");
+    const formLoader = document.getElementById("formLoader");
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
 
     function renderCourses() {
       coursesGrid.innerHTML = courses.map((course) => `
@@ -527,15 +677,26 @@
       document.getElementById("courseFocus").innerHTML = `<strong>Contenu :</strong> ${course.focus}`;
 
       if (!course.comingSoon && course.formUrl) {
-        formContainer.innerHTML = `<iframe src="${course.formUrl}" width="640" height="1628" frameborder="0" marginheight="0" marginwidth="0">Chargement…</iframe>`;
+        formLoader.classList.remove("hidden-loader");
+        formContainer.innerHTML = `<iframe id="courseFormFrame" src="${course.formUrl}" width="640" height="1628" frameborder="0" marginheight="0" marginwidth="0">Chargement…</iframe>`;
+        const iframe = document.getElementById("courseFormFrame");
+        iframe.addEventListener(
+          "load",
+          () => {
+            formLoader.classList.add("hidden-loader");
+          },
+          { once: true }
+        );
       } else {
         formContainer.innerHTML = "";
+        formLoader.classList.add("hidden-loader");
       }
 
       homeView.classList.add("hidden");
       courseView.classList.remove("hidden");
       window.scrollTo({ top: 0, behavior: "smooth" });
       history.pushState({ courseId: id }, "", `#course/${id}`);
+      closeMobileNav();
     }
 
     function goHome() {
@@ -543,10 +704,24 @@
       homeView.classList.remove("hidden");
       window.scrollTo({ top: 0, behavior: "smooth" });
       history.pushState({}, "", "#home");
+      closeMobileNav();
     }
 
     function scrollToCourses() {
       document.getElementById("courses").scrollIntoView({ behavior: "smooth" });
+      closeMobileNav();
+    }
+
+    function toggleMobileNav() {
+      const isOpen = navLinks.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+      navToggle.querySelector("span").textContent = isOpen ? "✕" : "☰";
+    }
+
+    function closeMobileNav() {
+      navLinks.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.querySelector("span").textContent = "☰";
     }
 
     function initRoute() {
@@ -563,6 +738,15 @@
     }
 
     window.addEventListener("popstate", initRoute);
+
+    navToggle.addEventListener("click", toggleMobileNav);
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 768) {
+          closeMobileNav();
+        }
+      });
+    });
 
     renderCourses();
     initRoute();
