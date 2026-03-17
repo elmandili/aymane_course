@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>aymane_course</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: rgba(255,255,255,0.08);
+      --card-border: rgba(255,255,255,0.12);
+      --text: #f5f7fb;
+      --muted: #b7bfd3;
+      --primary: #6ea8fe;
+      --primary-2: #8b5cf6;
+      --accent: #22c55e;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(110,168,254,0.22), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(139,92,246,0.22), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: auto;
+    }
+
+    header {
+      padding: 24px 0;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(12px);
+      background: rgba(11,16,32,0.65);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      z-index: 50;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .hero {
+      padding: 72px 0 44px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      max-width: 650px;
+      margin-bottom: 24px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    .badge {
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      border-radius: 999px;
+      color: #eaf0ff;
+      font-size: 14px;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+    }
+
+    .hero-card p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .hero-card ul {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .hero-card li {
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      color: #edf2ff;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      margin: 22px 0 8px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      margin-bottom: 26px;
+      line-height: 1.7;
+    }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-bottom: 50px;
+    }
+
+    .course-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .course-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(110,168,254,0.45);
+    }
+
+    .course-cover {
+      height: 170px;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, rgba(110,168,254,0.35), rgba(139,92,246,0.35));
+    }
+
+    .course-body {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+    }
+
+    .course-body h3 {
+      font-size: 1.25rem;
+    }
+
+    .course-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      background: rgba(255,255,255,0.07);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .course-body p {
+      color: var(--muted);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 15px;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: white;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .form-page {
+      padding: 34px 0 70px;
+    }
+
+    .back-btn {
+      margin-bottom: 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .form-layout {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .info-card, .form-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .info-card h2 {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .info-card p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+
+    .info-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      color: #edf2ff;
+    }
+
+    .info-list li {
+      background: rgba(255,255,255,0.05);
+      border-radius: 14px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    iframe {
+      width: 100%;
+      min-height: 820px;
+      border: none;
+      border-radius: 18px;
+      background: white;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 28px 0 40px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 960px) {
+      .hero,
+      .form-layout,
+      .courses-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding-top: 40px;
+      }
+
+      .hero-card,
+      .course-body,
+      .info-card,
+      .form-card {
+        padding: 18px;
+      }
+
+      iframe {
+        min-height: 700px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        
+        <span>aymane_course</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#home">Accueil</a>
+        <a href="#courses">Formations</a>
+        <a href="#apply">Inscription</a>
+        <a href="https://elmandili.com" target="_blank">À propos de moi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="container" data-view="home">
+      <div class="hero">
+        <div class="hero-text">
+          <div class="badge-row">
+              <span class="badge">Computer Science</span>
+            <span class="badge">Programmation</span>
+            <span class="badge">IA</span>
+            <span class="badge">Développement Web</span>
+            <span class="badge">Débutant à avancé</span>
+          </div>
+          <h1>Choisissez votre formation et commencez à apprendre avec Aymane Code.</h1>
+          <p>
+            Bienvenue sur la page officielle des formations Aymane Code. Choisissez la formation qui correspond à votre niveau,
+            cliquez dessus, puis accédez à la page d’inscription avec un formulaire Google intégré.
+          </p>
+          <button class="btn btn-primary" onclick="scrollToCourses()">Voir les formations</button>
+        </div>
+
+        <div class="hero-card">
+          <h3>Ce que les étudiants peuvent faire ici</h3>
+          <p>
+            Cette page permet à votre audience de découvrir facilement vos offres et de s’inscrire sans quitter le site.
+          </p>
+          <ul>
+            <li>Parcourir les formations disponibles</li>
+            <li>Voir le niveau, la durée et le contenu</li>
+            <li>Ouvrir la page d’inscription d’une formation</li>
+            <li>Remplir directement le formulaire Google sur le site</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 id="courses" class="section-title">Formations disponibles</h2>
+
+      <div class="courses-grid" id="coursesGrid"></div>
+    </section>
+
+    <section id="apply" class="container form-page hidden" data-view="course">
+      <button class="btn btn-secondary back-btn" onclick="goHome()">← Retour aux formations</button>
+      <div class="form-layout">
+        <div class="info-card">
+          <h2 id="courseTitle">Titre de la formation</h2>
+          <p id="courseDescription">La description de la formation apparaîtra ici.</p>
+          <ul class="info-list">
+            <li id="courseLevel"><strong>Niveau :</strong> Débutant</li>
+            <li id="courseDuration"><strong>Durée :</strong> 6 mois</li>
+            <li id="courseFormat"><strong>Format :</strong> En ligne</li>
+            <li id="courseFocus"><strong>Contenu :</strong> Projets pratiques</li>
+          </ul>
+        </div>
+
+        <div class="form-card">
+          <div id="formContainer"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Aymane Code — Construisez votre avenir avec le code.
+    </div>
+  </footer>
+
+  <script>
+    const courses = [
+      {
+        id: "computer-science",
+        emoji: "🧠",
+        title: "Fondamentaux de l’informatique",
+        level: "Débutant",
+        duration: "6 mois",
+        format: "En ligne",
+        focus: "Python, Git, maths, système",
+        description: "Apprenez les bases de l’informatique : Windows et DOS, installation de l’environnement de développement, programmation en Python, Git et GitHub, mathématiques essentielles et présentation professionnelle de votre travail.",
+        formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdvMXfHjFp7mefjkNFTCiO7WIvI2cICA9T-KCQeFEnsAelXiQ/viewform?usp=publish-editor",
+        comingSoon: false
+      },
+      {
+        id: "web-development",
+        emoji: "🌐",
+        title: "Développement Web",
+        level: "Bientôt disponible",
+        duration: "À venir",
+        format: "En ligne",
+        focus: "Frontend et backend",
+        description: "Apprenez à créer des sites web modernes et des applications web. Cette formation sera bientôt disponible.",
+        formUrl: "",
+        comingSoon: true
+      },
+      {
+        id: "networking",
+        emoji: "📡",
+        title: "Réseaux informatiques",
+        level: "Bientôt disponible",
+        duration: "À venir",
+        format: "En ligne",
+        focus: "Réseaux informatiques",
+        description: "Comprenez le fonctionnement des réseaux informatiques, des bases jusqu’aux configurations pratiques. Bientôt disponible.",
+        formUrl: "",
+        comingSoon: true
+      }
+    ];
+
+    const coursesGrid = document.getElementById("coursesGrid");
+    const homeView = document.querySelector('[data-view="home"]');
+    const courseView = document.querySelector('[data-view="course"]');
+
+    function renderCourses() {
+      coursesGrid.innerHTML = courses.map(course => `
+        <article class="course-card">
+          <div class="course-cover">${course.emoji}</div>
+          <div class="course-body">
+            <h3>${course.title}</h3>
+            <div class="course-meta">
+              <span class="chip">${course.level}</span>
+              <span class="chip">${course.duration}</span>
+              <span class="chip">${course.format}</span>
+            </div>
+            <p>${course.description}</p>
+            ${course.comingSoon
+              ? `<button class="btn btn-secondary" disabled>Bientôt disponible</button>`
+              : `<button class="btn btn-primary" onclick="openCourse('${course.id}')">Choisir cette formation</button>`}
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function openCourse(id) {
+      const course = courses.find(c => c.id === id);
+      if (!course) return;
+
+      document.getElementById("courseTitle").textContent = course.title;
+      document.getElementById("courseDescription").textContent = course.description;
+      document.getElementById("courseLevel").innerHTML = `<strong>Niveau :</strong> ${course.level}`;
+      document.getElementById("courseDuration").innerHTML = `<strong>Durée :</strong> ${course.duration}`;
+      document.getElementById("courseFormat").innerHTML = `<strong>Format :</strong> ${course.format}`;
+      document.getElementById("courseFocus").innerHTML = `<strong>Contenu :</strong> ${course.focus}`;
+      const formContainer = document.getElementById("formContainer");
+      if (!course.comingSoon) {
+        formContainer.innerHTML = `<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdvMXfHjFp7mefjkNFTCiO7WIvI2cICA9T-KCQeFEnsAelXiQ/viewform?embedded=true" width="640" height="1628" frameborder="0" marginheight="0" marginwidth="0">Chargement…</iframe>`;
+      } else {
+        formContainer.innerHTML = "";
+      }
+
+      homeView.classList.add("hidden");
+      courseView.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      history.pushState({ courseId: id }, "", `#course/${id}`);
+    }
+
+    function goHome() {
+      courseView.classList.add("hidden");
+      homeView.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      history.pushState({}, "", "#home");
+    }
+
+    function scrollToCourses() {
+      document.getElementById("courses").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function initRoute() {
+      const hash = window.location.hash;
+      if (hash.startsWith("#course/")) {
+        const id = hash.replace("#course/", "");
+        openCourse(id);
+      } else {
+        goHome();
+      }
+    }
+
+    window.addEventListener("popstate", initRoute);
+
+    renderCourses();
+    initRoute();
+  </script>
+</body>
+</html>
