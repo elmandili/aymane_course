@@ -1,0 +1,10 @@
+Cette formation en informatique est spécialement conçue pour les débutants souhaitant acquérir des bases solides et pratiques en programmation et en outils essentiels du développement.
+
+Au cours de ce programme, les étudiants apprendront à maîtriser les fondamentaux de l’environnement Windows, y compris l’utilisation du terminal (DOS), ainsi que la mise en place d’un environnement de développement adapté à leurs besoins.
+
+La formation couvre également les bases de l’informatique à travers le langage Python, permettant aux apprenants de comprendre la logique de programmation et de développer leurs premières applications.
+
+En parallèle, les participants seront initiés à l’utilisation de Git et GitHub pour la gestion de versions et la collaboration sur des projets réels. Des notions essentielles de mathématiques appliquées à l’informatique seront également abordées afin de renforcer la capacité d’analyse et de résolution de problèmes.
+
+
+Enfin, une attention particulière sera portée à la présentation du travail : les étudiants apprendront à structurer leurs projets, à les documenter correctement et à les présenter de manière professionnelle.

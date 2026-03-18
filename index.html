@@ -346,6 +346,46 @@
       border: 1px solid rgba(255,255,255,0.07);
     }
 
+    .plans {
+      margin-top: 24px;
+    }
+
+    .plans h3 {
+      margin-bottom: 16px;
+      font-size: 1.2rem;
+    }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .plan-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .plan-card h4 {
+      margin-bottom: 10px;
+    }
+
+    .plan-price {
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+
+    .plan-card ul {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
     .form-frame-wrapper {
       position: relative;
       min-height: 820px;
@@ -420,43 +460,14 @@
         grid-template-columns: 1fr;
       }
 
-      .hero-text {
-        text-align: center;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .badge-row {
-        justify-content: center;
-      }
-
-      .hero-text p {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-text button {
-        align-self: center;
-      }
-
       .hero-image {
         margin-top: 20px;
-        justify-content: center;
       }
 
       .hero-image img {
         max-width: 260px;
       }
     }
-
-      .hero-image {
-        margin-top: 20px;
-      }
-
-      .hero-image img {
-        max-width: 260px;
-      }
     
 
     @media (max-width: 768px) {
@@ -496,8 +507,23 @@
     }
 
     @media (max-width: 640px) {
+      .plans-grid {
+        grid-template-columns: 1fr;
+      }
       .hero {
         padding-top: 40px;
+      }
+
+      .hero-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero-text button {
+        margin: 0 auto;
+        display: block;
       }
 
       .hero-card,
@@ -515,6 +541,22 @@
         min-height: 700px;
       }
     }
+
+      .hero-card,
+      .course-body,
+      .info-card,
+      .form-card {
+        padding: 18px;
+      }
+
+      iframe {
+        min-height: 700px;
+      }
+
+      .form-frame-wrapper {
+        min-height: 700px;
+      }
+    
   </style>
 </head>
 <body>
@@ -554,7 +596,7 @@
         </div>
 
         <div class="hero-image">
-          <img src="img\profile.jpg" alt="Aymane" />
+          <img src="./img/profile.jpg" alt="Aymane" />
         </div>
       </div>
 
@@ -574,6 +616,33 @@
             <li id="courseFormat"><strong>Format :</strong> En ligne</li>
             <li id="courseFocus"><strong>Contenu :</strong> Projets pratiques</li>
           </ul>
+
+          <div class="plans">
+            <h3>Choisissez votre plan</h3>
+            <div class="plans-grid">
+              <div class="plan-card">
+                <h4>Individuel</h4>
+                <p class="plan-price">600 MAD / mois</p>
+                <ul>
+                  <li>✔ 1 séance / semaine</li>
+                  <li>✔ Durée : 1h30</li>
+                  <li>✔ Cours 1 à 1 personnalisé</li>
+                  <li>✔ Support 24/7</li>
+                </ul>
+              </div>
+
+              <div class="plan-card">
+                <h4>Groupe</h4>
+                <p class="plan-price">200 MAD / mois</p>
+                <ul>
+                  <li>✔ 1 séance / semaine</li>
+                  <li>✔ Durée : 1h</li>
+                  <li>✔ Apprentissage en groupe</li>
+                  <li>✖ Pas de support 24/7</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="form-card">
@@ -601,7 +670,7 @@
     const courses = [
       {
         id: "computer-science",
-        image: "img/cs.jpg",
+        image: "./img/cs.jpg",
         title: "Fondamentaux de l’informatique",
         level: "Débutant",
         duration: "6 mois",
@@ -613,7 +682,7 @@
       },
       {
         id: "web-development",
-        image: "img/web.avif",
+        image: "./img/web.avif",
         title: "Développement Web",
         level: "Bientôt disponible",
         duration: "À venir",
@@ -625,7 +694,7 @@
       },
       {
         id: "networking",
-        image: "img/networking.avif",
+        image: "./img/networking.jpg",
         title: "Réseaux informatiques",
         level: "Bientôt disponible",
         duration: "À venir",
